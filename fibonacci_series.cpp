@@ -20,10 +20,10 @@ long fib(int key) {
     else {
         long value;
          
-        if(key == 0)
-            value = 0;
-        else if(key == 1)
-            value = 1;
+        if(key < 0)
+            value = -1;
+        else if(key == 0 || key == 1)
+            value = key;
         else
             value = fib(key-1) + fib(key-2);
         
