@@ -41,8 +41,7 @@ int main()
     vector<vector<int>> cities = {{ 0, 20, 42, 35 },
                                   { 20, 0, 30, 34 },
                                   { 42, 30, 0, 12 },
-                                  { 35, 34, 12, 0 }
-                                  };
+                                  { 35, 34, 12, 0 }};
 
     cout << "Input adjacency matrix : " << endl << endl;
 
