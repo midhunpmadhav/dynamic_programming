@@ -6,6 +6,7 @@
  */
  
 #include<iostream>
+#define PRINT_DP_MATRIX 0
 
 using namespace std;
 
@@ -31,6 +32,7 @@ void lcs(char* x, char* y, int x_len, int y_len) {
                     // Otherwise find save the max of non diagonal elements.
                     arr[i][j] = max(arr[i-1][j], arr[i][j-1]);
 
+#if PRINT_DP_MATRIX
     // Print the matrix
     cout << "DP matrix is as follows:" << endl << "\t";
     for(int i = 0; i <= x_len; ++i) {
@@ -44,8 +46,10 @@ void lcs(char* x, char* y, int x_len, int y_len) {
         }
         cout << endl << "\t";
     }
-    
-    cout << endl <<  "Longest subsequence length is " << arr[x_len][y_len];
+    cout << endl;
+#endif
+
+    cout << "Longest subsequence length is " << arr[x_len][y_len];
 
     int i = x_len;
     int j = y_len;
@@ -80,7 +84,7 @@ void lcs(char* x, char* y, int x_len, int y_len) {
 
 int main() {
 
-    char x[] = "ABCD";
+    char x[] = "YABCD";
     char y[] = "AXAYBZCC";
 
     int x_len = strlen(x);

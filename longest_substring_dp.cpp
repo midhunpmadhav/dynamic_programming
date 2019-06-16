@@ -6,6 +6,7 @@
  */
  
 #include<iostream>
+#define PRINT_DP_MATRIX 0
 
 using namespace std;
 
@@ -34,7 +35,7 @@ void lcs(char* x, char* y, int x_len, int y_len) {
                 else
                     // Otherwise 0.
                     arr[i][j] = 0;
-
+#if PRINT_DP_MATRIX
     // Print the matrix
     cout << "DP matrix is as follows:" << endl << "\t";
     for(int i = 0; i <= x_len; ++i) {
@@ -48,8 +49,9 @@ void lcs(char* x, char* y, int x_len, int y_len) {
         }
         cout << endl << "\t";
     }
-    
-    cout << endl <<  "Longest substring length is " << arr[end_x][end_y];
+    cout << endl;
+#endif
+    cout << "Longest substring length is " << arr[end_x][end_y];
 
     int i = end_x;
     int j = end_y;
