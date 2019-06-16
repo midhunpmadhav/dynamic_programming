@@ -25,10 +25,10 @@ void lcs(char* x, char* y, int x_len, int y_len) {
                 arr[i][j] = 0;
             else
                 if(x[i-1] == y[j-1])
-                    //If we find a same character, save prev diagonal element + 1.
+                    //If we find common character, save prev diagonal element + 1.
                     arr[i][j] = 1 + arr[i-1][j-1];
                 else
-                    // Otherwise find save the max of no diagonal elements.
+                    // Otherwise find save the max of non diagonal elements.
                     arr[i][j] = max(arr[i-1][j], arr[i][j-1]);
 
     // Print the matrix
