@@ -1,20 +1,18 @@
 /*
  * Author      : Midhun P
- * Description : Longest subsequence.
+ * Description : Longest substring.
  * Remarks     : IF x[i] == y[j] -> a[i][j] = a[i-1][j-1]
- *               ELSE -> a[i][j] = max(arr[i-1][j], arr[i][j-1])
+ *               ELSE -> a[i][j] = 0
  */
  
 #include<iostream>
 
 using namespace std;
 
-int max(int m, int n) {
-    return (m > n) ? m : n;
-}
-
 void lcs(char* x, char* y, int x_len, int y_len) {
     
+    int max = 0;
+    int end_x = 0, end_y = 0;
     int arr[x_len+1][y_len+1];
 
     // Find the length.
@@ -24,12 +22,18 @@ void lcs(char* x, char* y, int x_len, int y_len) {
                 // Fill the sides with 0;
                 arr[i][j] = 0;
             else
-                if(x[i-1] == y[j-1])
+                if(x[i-1] == y[j-1]) {
                     //If we find common character, save prev diagonal element + 1.
                     arr[i][j] = 1 + arr[i-1][j-1];
+                    if (max < arr[i][j]) {
+                        max = arr[i][j];
+                        end_x = i;
+                        end_y = j;
+                    }
+                }
                 else
-                    // Otherwise find save the max of non diagonal elements.
-                    arr[i][j] = max(arr[i-1][j], arr[i][j-1]);
+                    // Otherwise 0.
+                    arr[i][j] = 0;
 
     // Print the matrix
     cout << "DP matrix is as follows:" << endl << "\t";
@@ -45,34 +49,32 @@ void lcs(char* x, char* y, int x_len, int y_len) {
         cout << endl << "\t";
     }
     
-    cout << endl <<  "Longest subsequence length is " << arr[x_len][y_len];
+    cout << endl <<  "Longest substring length is " << arr[end_x][end_y];
 
-    int i = x_len;
-    int j = y_len;
-    int index = arr[x_len][y_len];
+    int i = end_x;
+    int j = end_y;
+    int index = max;
     char* result = (char*) malloc(index + 1);
 
     // Find the subseuence string.
     result[index--] = '\0';
 
     while(i != 0 && j != 0) {
-        if(arr[i][j] == arr[i-1][j])
-            --i;
-        else if (arr[i][j] == arr[i][j-1])
-            --j;
-        else if(arr[i][j] == (1+ arr[i-1][j-1])) {
+        if(arr[i][j] == 0)
+            break;
+        else if(arr[i][j] == (1 + arr[i-1][j-1])) {
             result[index--] = x[i-1];
             --i;
             --j;
         }
         else {
-            cout << "BUG: Something went wrong" << endl;
+            cout << endl << "BUG: Something went wrong"<< endl;
             return;
         }
     }
 
-    if(arr[x_len][y_len] > 0)
-        cout << " and subsequence is \"" << result << "\"" << endl;
+    if(arr[end_x][end_y] > 0)
+        cout << " and substring is \"" << result << "\"" << endl;
     else
         cout << endl;
     
@@ -80,8 +82,8 @@ void lcs(char* x, char* y, int x_len, int y_len) {
 
 int main() {
 
-    char x[] = "ABCD";
-    char y[] = "AXAYBZCC";
+    char x[] = "XABABCFCDY";
+    char y[] = "AXYABCYBZCC";
 
     int x_len = strlen(x);
     int y_len = strlen(y);
