@@ -1,7 +1,7 @@
 /*
  * Author      : Midhun P
- * Usage       : Educational purpose
  * Description : Fibonacci series using map
+ * Remarks     : fib(n) = fib(n-1) + fib(n-2)
  */
  
 #include <iostream>
