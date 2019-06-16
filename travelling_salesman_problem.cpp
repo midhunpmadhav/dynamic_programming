@@ -1,7 +1,7 @@
 /*
  * Author      : Midhun P
- * Usage       : Educational purpose
  * Description : Travelling sales man problem (Dynamic Programming)
+ * Remarks     : T(i,s) = min[(i,j) + T(j,S – {j})]; S!= Ø; j€S;
  */
  
 #include <iostream>
