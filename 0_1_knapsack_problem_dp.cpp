@@ -5,7 +5,7 @@
  */
  
 #include<iostream>
-#define PRINT_DP_MATRIX 1
+#define PRINT_DP_MATRIX 0
 
 using namespace std;
 
@@ -67,9 +67,11 @@ void knap(int nw, int n, int* w, int* p) {
     int index = arr[n][nw];
     bool result[n];
 
-    // Find the selected items.
+    for(int k=0; k < n; ++k)
+        result[k] = false;
 
-    while(i != 0 || j != 0) {
+    // Find the selected items.
+    while(j != 0) {
         if(arr[i][j] == arr[i-1][j]) {
             result[--i] = false;
         }
@@ -82,7 +84,6 @@ void knap(int nw, int n, int* w, int* p) {
                     break;
                 }
         }
-        
     }
 
     if(arr[n][nw] > 0) {
