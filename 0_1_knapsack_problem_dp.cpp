@@ -5,7 +5,7 @@
  */
  
 #include<iostream>
-#define PRINT_DP_MATRIX 0
+#define PRINT_DP_MATRIX 1
 
 using namespace std;
 
@@ -30,14 +30,17 @@ void knap(int nw, int n, int* w, int* p) {
                 swap(w[i], w[j]);
                 swap(p[i], p[j]);
             }
-
+    // Start solving sub problems.
     for(int i = 0; i <= n; ++i)
         for(int j = 0; j <= nw; ++j) 
             if(i == 0 || j == 0)
+                // Fill the sides with 0.
                 arr[i][j] = 0;
             else if (j < w[i-1])
+                // We will not be able to accomodate item i-1 with weight j.
                 arr[i][j] = arr[i-1][j];
             else
+                // Find the maximum of profit with or without choosing item i-1.
                 arr[i][j] = max(arr[i-1][j], p[i-1] + arr[i-1][j-w[i-1]]);
 
 #if PRINT_DP_MATRIX
@@ -57,7 +60,7 @@ void knap(int nw, int n, int* w, int* p) {
     cout << endl;
 #endif    
             
-    cout << "We can make profit of " << arr[n][nw] << " rupees ";
+    cout << "We can make maximum profit of " << arr[n][nw] << " rupees ";
 
     int i = n;
     int j = nw;
@@ -66,13 +69,18 @@ void knap(int nw, int n, int* w, int* p) {
 
     // Find the selected items.
 
-    while(i != 0 && j != 0) {
+    while(i != 0 || j != 0) {
         if(arr[i][j] == arr[i-1][j]) {
             result[--i] = false;
         }
         else {
-            result[--i] = true;
-            j -= w[i];
+            result[i-1] = true;
+            for(int k = 0; k < j; ++k)
+                if(arr[i][k] == (arr[i][j] - p[i-1])) {
+                    --i;
+                    j = k;
+                    break;
+                }
         }
         
     }
@@ -82,7 +90,7 @@ void knap(int nw, int n, int* w, int* p) {
 
         for(int i = 0; i < n ; ++i) 
             if(result[i])
-                cout << w[i] << ", ";
+                cout << w[i] << "(" << p[i] << "), ";
         cout << "\b\b ";
     }
 
@@ -91,10 +99,10 @@ void knap(int nw, int n, int* w, int* p) {
 
 int main() {
 
-    int n = 4;
-    int nw = 8;
-    int weight[] = {3, 4, 6, 5};
-    int profit[] = {2, 3, 1, 4};
+    int n = 5;
+    int nw = 10;
+    int weight[] = {3, 4, 6, 5, 4};
+    int profit[] = {2, 3, 1, 4, 7};
 
     cout << "Net weight = " << nw << endl 
          << "Available Weights are : " << endl;
