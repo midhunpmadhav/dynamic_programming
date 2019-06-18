@@ -78,7 +78,7 @@ void knap(int nw, int n, int* w, int* p) {
         else {
             result[i-1] = true;
             for(int k = 0; k < j; ++k)
-                if(arr[i][k] == (arr[i][j] - p[i-1])) {
+                if(arr[i-1][k] == (arr[i][j] - p[i-1])) {
                     --i;
                     j = k;
                     break;
