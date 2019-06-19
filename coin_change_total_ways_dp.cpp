@@ -55,7 +55,7 @@ void coin_change(int nv, int n, int* coins) {
     cout << "DP matrix is as follows:" << endl << "\t";
     for(int i = 0; i < n; ++i) {
         for(int j = 0; j <= nv; ++j) 
-            cout << arr[i][j] << " ";
+            printf("%3d ", arr[i][j]);
         cout << endl << "\t";
     }
     cout << endl;

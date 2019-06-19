@@ -41,11 +41,11 @@ void lcs(char* x, char* y, int x_len, int y_len) {
     for(int i = 0; i <= x_len; ++i) {
         for(int j = 0; j <= y_len; ++j) {
             if(i == 0 && j != 0)
-                cout << y[j-1] << " ";
+                printf("%3c ", y[j-1]);
             else if(i != 0 && j == 0)
-                cout << x[i-1] << " ";
+                printf("%3c ", x[i-1]);
             else
-                cout << arr[i][j] << " ";
+                printf("%3d ", arr[i][j]);
         }
         cout << endl << "\t";
     }
