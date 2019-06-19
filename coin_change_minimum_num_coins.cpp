@@ -7,7 +7,7 @@
  */
  
 #include<iostream>
-#define PRINT_DP_MATRIX 1
+#define PRINT_DP_MATRIX 0
 
 using namespace std;
 
