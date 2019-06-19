@@ -20,7 +20,7 @@ void coin_change(int nv, int n, int* coins) {
 
     int arr[n][nv+1];
 
-    // Sort weight array first.
+    // Sort coins array first.
     for(int i = 0; i < n - 1; ++i)
         for(int j = i + 1; j < n; ++j) 
             if(coins[i] > coins[j]) 
